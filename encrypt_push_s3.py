@@ -54,8 +54,8 @@ pq.write_table(pa.Table.from_pandas(promotional_engagement_df), promotional_enga
 # Assume Role
 role_arn = 'arn:aws:iam::253722483539:role/abc-s3-kms-ro-role'
 role_session_name = 'AssumedRoleSession'
-source_access_key = 'AKIATWEYJ3NJ2K5LUVHK'
-source_secret_key = 'ptyr6M3AsmbSq4P7NF0zo7Yu1TMp7twJOxfJsLKd'
+source_access_key = <your-access-key>
+source_secret_key = <your-secret-key>
 
 sts_client = boto3.client('sts', aws_access_key_id=source_access_key, aws_secret_access_key=source_secret_key)
 
