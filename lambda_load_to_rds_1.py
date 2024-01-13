@@ -12,16 +12,11 @@ s3_client = boto3.client('s3')
 
 def lambda_handler(event, context):
     try:
-        # Extract information from the S3 event
-        # s3_bucket = event['Records'][0]['s3']['bucket']['name']
-        # s3_key = event['Records'][0]['s3']['object']['key']
         
         s3_bucket = event['s3_bucket']
         s3_key = event['s3_key']
         load = event['load']
         
-        print(s3_bucket)
-        print(s3_key)
 
         # Read data from S3
         parquet_data = read_data_from_s3(s3_bucket, s3_key)
@@ -54,11 +49,7 @@ def read_data_from_s3(s3_bucket, s3_key):
         s3_object = s3_client.get_object(Bucket=s3_bucket, Key=s3_key)
         data = s3_object['Body'].read()
         
-        print('data', data)
-        # Step 1: Read Parquet data
         parquet_data = pq.read_table(BytesIO(data))
-        
-        print('parquet_data', parquet_data)
 
         return parquet_data
     except Exception as e:
